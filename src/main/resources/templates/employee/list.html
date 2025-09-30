@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Employees</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+  <h1>Employee List</h1>
+  <a href="/employees/new">+ New Employee</a>
+  <table>
+    <thead>
+      <tr>
+        <th>Emp#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="emp : ${employees}">
+        <td th:text="${emp.empNumber}"></td>
+        <td th:text="${emp.firstName} + ' ' + ${emp.lastName}"></td>
+        <td th:text="${emp.email}"></td>
+        <td th:text="${emp.phone}"></td>
+        <td>
+          <a th:href="@{'/employees/edit/' + ${emp.id}}">Edit</a> |
+          <a th:href="@{'/employees/delete/' + ${emp.id}}"
+             onclick="return confirm('Delete this employee?')">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
