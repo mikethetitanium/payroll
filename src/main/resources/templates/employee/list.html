@@ -2,34 +2,124 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Employees</title>
-  <link rel="stylesheet" href="/css/style.css"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff0f0;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .container {
+      width: 80%;
+      max-width: 1000px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #e60000;
+      margin-bottom: 20px;
+    }
+
+    /* New Employee button */
+    a.new-employee {
+      display: inline-block;
+      background-color: #28a745; /* green */
+      color: #fff;
+      padding: 8px 15px;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      transition: background-color 0.3s ease;
+    }
+
+    a.new-employee:hover {
+      background-color: #218838;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: #ff4d4d;
+      color: #fff;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    tbody tr:hover {
+      background-color: #ffe5e5;
+    }
+
+    td a {
+      font-weight: bold;
+      margin-right: 10px;
+      text-decoration: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      color: #fff;
+    }
+
+    td a.edit-btn {
+      background-color: #007bff; /* blue */
+    }
+
+    td a.edit-btn:hover {
+      background-color: #0069d9;
+    }
+
+    td a.delete-btn {
+      background-color: #e60000; /* red */
+    }
+
+    td a.delete-btn:hover {
+      background-color: #b30000;
+    }
+  </style>
 </head>
 <body>
-  <h1>Employee List</h1>
-  <a href="/employees/new">+ New Employee</a>
-  <table>
-    <thead>
-      <tr>
-        <th>Emp#</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr th:each="emp : ${employees}">
-        <td th:text="${emp.empNumber}"></td>
-        <td th:text="${emp.firstName} + ' ' + ${emp.lastName}"></td>
-        <td th:text="${emp.email}"></td>
-        <td th:text="${emp.phone}"></td>
-        <td>
-          <a th:href="@{'/employees/edit/' + ${emp.id}}">Edit</a> |
-          <a th:href="@{'/employees/delete/' + ${emp.id}}"
-             onclick="return confirm('Delete this employee?')">Delete</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="container">
+    <h1>Employee List</h1>
+    <a class="new-employee" href="/employees/new">+ New Employee</a>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Emp#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="emp : ${employees}">
+          <td th:text="${emp.empNumber}"></td>
+          <td th:text="${emp.firstName} + ' ' + ${emp.lastName}"></td>
+          <td th:text="${emp.email}"></td>
+          <td th:text="${emp.phone}"></td>
+          <td>
+            <a th:href="@{'/employees/edit/' + ${emp.id}}" class="edit-btn">Edit</a>
+            <a th:href="@{'/employees/delete/' + ${emp.id}}" 
+               class="delete-btn"
+               onclick="return confirm('Delete this employee?')">Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>

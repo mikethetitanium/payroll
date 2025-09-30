@@ -1,6 +1,6 @@
 -- Employee master data
 CREATE TABLE employee (
-    id CHAR(36) PRIMARY KEY DEFAULT (UUID()),
+    id VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
     emp_number VARCHAR(50) NOT NULL UNIQUE,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
@@ -14,10 +14,9 @@ CREATE TABLE employee (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Employment contracts
 CREATE TABLE contract (
-    id CHAR(36) PRIMARY KEY DEFAULT (UUID()),
-    employee_id CHAR(36) NOT NULL,
+    id VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
+    employee_id VARCHAR(36) NOT NULL,
     pay_type ENUM('MONTHLY','WEEKLY','DAILY') NOT NULL,
     base_salary DECIMAL(15,2) NOT NULL,
     currency CHAR(3) NOT NULL DEFAULT 'KES',
